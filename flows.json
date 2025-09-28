@@ -1,1 +1,518 @@
-[]
+[
+    {
+        "id": "e6cd444dcfd5e884",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d445d260.887a2",
+        "type": "tab",
+        "label": "WA4YA Antenna Switch",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "ui_tab_main",
+        "type": "ui_tab",
+        "name": "Antenna Control",
+        "icon": "dashboard",
+        "order": 1
+    },
+    {
+        "id": "ui_group_settings",
+        "type": "ui_group",
+        "name": "Sequencer Settings",
+        "tab": "ui_tab_main",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "e20f16a4.627318",
+        "type": "RelayJ2",
+        "z": "d445d260.887a2",
+        "name": "Relay J2",
+        "x": 1120,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "3523ad5c.eb6d32",
+        "type": "inject",
+        "z": "d445d260.887a2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "vertical",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 110,
+        "y": 200,
+        "wires": [
+            [
+                "3f7960a3.fd9d9"
+            ]
+        ]
+    },
+    {
+        "id": "85c106e7.6370a8",
+        "type": "inject",
+        "z": "d445d260.887a2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "vertical",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "dcd49b4aefbe7fae",
+                "3f7960a3.fd9d9"
+            ]
+        ]
+    },
+    {
+        "id": "830cd5fa.7f6fd8",
+        "type": "RelayJ3",
+        "z": "d445d260.887a2",
+        "name": "Relay J3 fandipole",
+        "x": 1130,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "3f7960a3.fd9d9",
+        "type": "RelayJ4",
+        "z": "d445d260.887a2",
+        "name": "Relay J4 Vertical",
+        "x": 1130,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "1330a95f.7753b7",
+        "type": "RelayJ5",
+        "z": "d445d260.887a2",
+        "name": "Relay J5 deltaloop",
+        "x": 1110,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "a63eab5a.daf578",
+        "type": "inject",
+        "z": "d445d260.887a2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "fandipole",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 110,
+        "y": 40,
+        "wires": [
+            [
+                "bd7d886ef1b0b04d",
+                "830cd5fa.7f6fd8"
+            ]
+        ]
+    },
+    {
+        "id": "e0c647cc.665058",
+        "type": "inject",
+        "z": "d445d260.887a2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "fandipole",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 110,
+        "y": 80,
+        "wires": [
+            [
+                "830cd5fa.7f6fd8"
+            ]
+        ]
+    },
+    {
+        "id": "5d7bc4cc.9c9cfc",
+        "type": "inject",
+        "z": "d445d260.887a2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "deltaloop",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 110,
+        "y": 420,
+        "wires": [
+            [
+                "798037a2f3587fd3"
+            ]
+        ]
+    },
+    {
+        "id": "6ef75fc1.9684a",
+        "type": "inject",
+        "z": "d445d260.887a2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "deltaloop",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 110,
+        "y": 460,
+        "wires": [
+            [
+                "4dc7a9dd875e4f12"
+            ]
+        ]
+    },
+    {
+        "id": "dcd49b4aefbe7fae",
+        "type": "Invert",
+        "z": "d445d260.887a2",
+        "name": "Invert",
+        "x": 750,
+        "y": 180,
+        "wires": [
+            [
+                "830cd5fa.7f6fd8",
+                "4dc7a9dd875e4f12",
+                "e20f16a4.627318"
+            ]
+        ]
+    },
+    {
+        "id": "bd7d886ef1b0b04d",
+        "type": "Invert",
+        "z": "d445d260.887a2",
+        "name": "Invert",
+        "x": 770,
+        "y": 40,
+        "wires": [
+            [
+                "e20f16a4.627318",
+                "3f7960a3.fd9d9",
+                "4dc7a9dd875e4f12"
+            ]
+        ]
+    },
+    {
+        "id": "798037a2f3587fd3",
+        "type": "Invert",
+        "z": "d445d260.887a2",
+        "name": "Invert",
+        "x": 810,
+        "y": 420,
+        "wires": [
+            [
+                "1330a95f.7753b7",
+                "3f7960a3.fd9d9",
+                "830cd5fa.7f6fd8",
+                "e20f16a4.627318"
+            ]
+        ]
+    },
+    {
+        "id": "4dc7a9dd875e4f12",
+        "type": "Invert",
+        "z": "d445d260.887a2",
+        "name": "Invert",
+        "x": 810,
+        "y": 480,
+        "wires": [
+            [
+                "1330a95f.7753b7"
+            ]
+        ]
+    },
+    {
+        "id": "ui_form_sequencer",
+        "type": "ui_form",
+        "z": "d445d260.887a2",
+        "name": "Antenna Settings",
+        "label": "Select RX/TX & Interval",
+        "group": "ui_group_settings",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "RX Antenna",
+                "value": "rxAntenna",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "TX Antenna",
+                "value": "txAntenna",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "TX Interval Mode",
+                "value": "txMode",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "rxAntenna": "",
+            "txAntenna": "",
+            "txMode": ""
+        },
+        "payload": "",
+        "submit": "",
+        "cancel": "",
+        "topic": "antenna_settings",
+        "topicType": "str",
+        "splitLayout": false,
+        "className": "",
+        "x": 150,
+        "y": 560,
+        "wires": [
+            [
+                "set_flow_vars"
+            ]
+        ]
+    },
+    {
+        "id": "set_flow_vars",
+        "type": "function",
+        "z": "d445d260.887a2",
+        "name": "Store Settings",
+        "func": "// Store the selected RX/TX antennas and interval mode in flow context\nflow.set('rxAntenna', msg.payload.rxAntenna);\nflow.set('txAntenna', msg.payload.txAntenna);\nflow.set('txMode', msg.payload.txMode);\nreturn null;",
+        "outputs": 0,
+        "noerr": 0,
+        "x": 460,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "cron_plus_node",
+        "type": "cronplus",
+        "z": "d445d260.887a2",
+        "name": "Antenna Sequencer Scheduler",
+        "outputField": "",
+        "timeZone": "",
+        "storeName": "",
+        "commandResponseMsgOutput": "output1",
+        "defaultLocation": "",
+        "defaultLocationType": "default",
+        "outputs": 1,
+        "options": [
+            {
+                "name": "t59",
+                "topic": "t59",
+                "payloadType": "str",
+                "payload": "t59",
+                "expressionType": "cron",
+                "expression": "59 * * * * *",
+                "location": "",
+                "offset": "0",
+                "solarType": "all",
+                "solarEvents": "sunrise,sunset"
+            },
+            {
+                "name": "t14",
+                "topic": "t14",
+                "payloadType": "str",
+                "payload": "t14",
+                "expressionType": "cron",
+                "expression": "14 * * * * *",
+                "location": "",
+                "offset": "0",
+                "solarType": "all",
+                "solarEvents": "sunrise,sunset"
+            },
+            {
+                "name": "t29",
+                "topic": "t29",
+                "payloadType": "str",
+                "payload": "t29",
+                "expressionType": "cron",
+                "expression": "29 * * * * *",
+                "location": "",
+                "offset": "0",
+                "solarType": "all",
+                "solarEvents": "sunrise,sunset"
+            },
+            {
+                "name": "t44",
+                "topic": "t44",
+                "payloadType": "str",
+                "payload": "t44",
+                "expressionType": "cron",
+                "expression": "44 * * * * *",
+                "location": "",
+                "offset": "0",
+                "solarType": "all",
+                "solarEvents": "sunrise,sunset"
+            }
+        ],
+        "x": 150,
+        "y": 260,
+        "wires": [
+            [
+                "sequencer_function"
+            ]
+        ]
+    },
+    {
+        "id": "sequencer_function",
+        "type": "function",
+        "z": "d445d260.887a2",
+        "name": "Antenna Sequencer",
+        "func": "// msg.payload is t14/t29/t44/t59\nconst tick = msg.payload;\nconst txMode = (flow.get('txMode') || 'even').toString();\nconst txA = (flow.get('txAntenna') || 'vertical').toString();\nlet rxA = flow.get('rxAntenna');\nif (!rxA) {\n    rxA = (txA === 'vertical') ? 'fandipole' : 'vertical';\n}\nrxA = rxA.toString();\nconst antennas = ['vertical', 'fandipole', 'deltaloop'];\nlet action = null;\nif (txMode === 'even') {\n    if (tick === 't59' || tick === 't29') action = 'toTX';\n    else if (tick === 't14' || tick === 't44') action = 'toRX';\n} else {\n    if (tick === 't14' || tick === 't44') action = 'toTX';\n    else if (tick === 't29' || tick === 't59') action = 'toRX';\n}\nconst out = [];\nif (action === 'toTX') {\n    if (txA === 'vertical') out.push({payload:true, topic:'vertical'});\n    if (txA === 'fandipole') out.push({payload:true, topic:'fandipole'});\n    if (txA === 'deltaloop') out.push({payload:true, topic:'deltaloop'});\n} else if (action === 'toRX') {\n    if (rxA === 'vertical') out.push({payload:true, topic:'vertical'});\n    if (rxA === 'fandipole') out.push({payload:true, topic:'fandipole'});\n    if (rxA === 'deltaloop') out.push({payload:true, topic:'deltaloop'});\n}\nreturn out;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 180,
+        "y": 320,
+        "wires": [
+            [
+                "invert_vertical",
+                "invert_fandipole",
+                "invert_deltaloop"
+            ]
+        ]
+    },
+    {
+        "id": "invert_vertical",
+        "type": "function",
+        "z": "d445d260.887a2",
+        "name": "Vertical Output",
+        "func": "// Only pass messages for vertical\nif(msg.topic === 'vertical'){\n    return [{payload: msg.payload}, {payload: msg.payload}]; // first = Invert, second = Relay\n} else { return null; }",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 460,
+        "y": 180,
+        "wires": [
+            [
+                "dcd49b4aefbe7fae"
+            ],
+            [
+                "3f7960a3.fd9d9"
+            ]
+        ]
+    },
+    {
+        "id": "invert_fandipole",
+        "type": "function",
+        "z": "d445d260.887a2",
+        "name": "Fandipole Output",
+        "func": "// Only pass messages for fandipole\nif(msg.topic === 'fandipole'){\n    return [{payload: msg.payload}, {payload: msg.payload}];\n} else { return null; }",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 450,
+        "y": 80,
+        "wires": [
+            [
+                "bd7d886ef1b0b04d"
+            ],
+            [
+                "830cd5fa.7f6fd8"
+            ]
+        ]
+    },
+    {
+        "id": "invert_deltaloop",
+        "type": "function",
+        "z": "d445d260.887a2",
+        "name": "DeltaLoop Output",
+        "func": "// Only pass messages for deltaloop\nif(msg.topic === 'deltaloop'){\n    return [{payload: msg.payload}, {payload: msg.payload}, {payload: msg.payload}];\n} else { return null; }",
+        "outputs": 3,
+        "noerr": 0,
+        "x": 550,
+        "y": 380,
+        "wires": [
+            [
+                "798037a2f3587fd3"
+            ],
+            [
+                "4dc7a9dd875e4f12"
+            ],
+            [
+                "1330a95f.7753b7"
+            ]
+        ]
+    }
+]
