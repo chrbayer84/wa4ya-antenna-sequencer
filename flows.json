@@ -341,7 +341,7 @@
             "txMode": ""
         },
         "payload": "",
-        "submit": "",
+        "submit": "OK",
         "cancel": "",
         "topic": "antenna_settings",
         "topicType": "str",
@@ -444,9 +444,13 @@
         "name": "Antenna Sequencer",
         "func": "// msg.payload is t14/t29/t44/t59\nconst tick = msg.payload;\nconst txMode = (flow.get('txMode') || 'even').toString();\nconst txA = (flow.get('txAntenna') || 'vertical').toString();\nlet rxA = flow.get('rxAntenna');\nif (!rxA) {\n    rxA = (txA === 'vertical') ? 'fandipole' : 'vertical';\n}\nrxA = rxA.toString();\nconst antennas = ['vertical', 'fandipole', 'deltaloop'];\nlet action = null;\nif (txMode === 'even') {\n    if (tick === 't59' || tick === 't29') action = 'toTX';\n    else if (tick === 't14' || tick === 't44') action = 'toRX';\n} else {\n    if (tick === 't14' || tick === 't44') action = 'toTX';\n    else if (tick === 't29' || tick === 't59') action = 'toRX';\n}\nconst out = [];\nif (action === 'toTX') {\n    if (txA === 'vertical') out.push({payload:true, topic:'vertical'});\n    if (txA === 'fandipole') out.push({payload:true, topic:'fandipole'});\n    if (txA === 'deltaloop') out.push({payload:true, topic:'deltaloop'});\n} else if (action === 'toRX') {\n    if (rxA === 'vertical') out.push({payload:true, topic:'vertical'});\n    if (rxA === 'fandipole') out.push({payload:true, topic:'fandipole'});\n    if (rxA === 'deltaloop') out.push({payload:true, topic:'deltaloop'});\n}\nreturn out;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
-        "x": 180,
-        "y": 320,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 340,
         "wires": [
             [
                 "invert_vertical",
@@ -500,7 +504,11 @@
         "name": "DeltaLoop Output",
         "func": "// Only pass messages for deltaloop\nif(msg.topic === 'deltaloop'){\n    return [{payload: msg.payload}, {payload: msg.payload}, {payload: msg.payload}];\n} else { return null; }",
         "outputs": 3,
+        "timeout": "",
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 550,
         "y": 380,
         "wires": [
