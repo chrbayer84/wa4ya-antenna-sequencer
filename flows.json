@@ -350,8 +350,7 @@
         "y": 260,
         "wires": [
             [
-                "sequencer_function",
-                "47a267661a46d7e0"
+                "sequencer_function"
             ]
         ]
     },
@@ -373,7 +372,8 @@
             [
                 "invert_vertical",
                 "invert_fandipole",
-                "invert_deltaloop"
+                "invert_deltaloop",
+                "4bce392e4f5244f1"
             ]
         ]
     },
@@ -438,26 +438,6 @@
             ],
             [
                 "1330a95f.7753b7"
-            ]
-        ]
-    },
-    {
-        "id": "47a267661a46d7e0",
-        "type": "function",
-        "z": "d445d260.887a2",
-        "name": "function 1",
-        "func": "node.log(\"Received: \" + msg.payload);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 480,
-        "y": 300,
-        "wires": [
-            [
-                "4bce392e4f5244f1"
             ]
         ]
     },
