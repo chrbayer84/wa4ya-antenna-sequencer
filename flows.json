@@ -1,13 +1,5 @@
 [
     {
-        "id": "e6cd444dcfd5e884",
-        "type": "tab",
-        "label": "Flow 1",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "d445d260.887a2",
         "type": "tab",
         "label": "WA4YA Antenna Switch",
@@ -358,7 +350,8 @@
         "y": 260,
         "wires": [
             [
-                "sequencer_function"
+                "sequencer_function",
+                "47a267661a46d7e0"
             ]
         ]
     },
@@ -446,6 +439,24 @@
             [
                 "1330a95f.7753b7"
             ]
+        ]
+    },
+    {
+        "id": "47a267661a46d7e0",
+        "type": "function",
+        "z": "d445d260.887a2",
+        "name": "function 1",
+        "func": "node.log(\"Received: \" + msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 300,
+        "wires": [
+            []
         ]
     },
     {
