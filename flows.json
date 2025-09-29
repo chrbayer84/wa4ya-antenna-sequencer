@@ -372,8 +372,7 @@
             [
                 "invert_vertical",
                 "invert_fandipole",
-                "invert_deltaloop",
-                "4bce392e4f5244f1"
+                "invert_deltaloop"
             ]
         ]
     },
@@ -392,7 +391,8 @@
                 "dcd49b4aefbe7fae"
             ],
             [
-                "3f7960a3.fd9d9"
+                "3f7960a3.fd9d9",
+                "4bce392e4f5244f1"
             ]
         ]
     },
@@ -427,7 +427,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 550,
+        "x": 470,
         "y": 380,
         "wires": [
             [
