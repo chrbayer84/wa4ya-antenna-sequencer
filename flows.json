@@ -22,13 +22,6 @@
         "info": ""
     },
     {
-        "id": "ui_tab_main",
-        "type": "ui_tab",
-        "name": "Antenna Control",
-        "icon": "dashboard",
-        "order": 1
-    },
-    {
         "id": "e20f16a4.627318",
         "type": "RelayJ2",
         "z": "d445d260.887a2",
