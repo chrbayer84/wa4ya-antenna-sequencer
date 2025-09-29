@@ -29,16 +29,6 @@
         "order": 1
     },
     {
-        "id": "ui_group_settings",
-        "type": "ui_group",
-        "name": "Sequencer Settings",
-        "tab": "ui_tab_main",
-        "order": 1,
-        "disp": true,
-        "width": "6",
-        "collapse": false
-    },
-    {
         "id": "e20f16a4.627318",
         "type": "RelayJ2",
         "z": "d445d260.887a2",
@@ -384,7 +374,7 @@
         "type": "function",
         "z": "d445d260.887a2",
         "name": "Antenna Sequencer",
-        "func": "// msg.payload is t14/t29/t44/t59\nconst tick = msg.payload;\n\nconst txMode = (flow.get('txMode') || 'even').toString();\nconst txA = (flow.get('txAntenna') || 'vertical').toString();\nlet rxA = flow.get('rxAntenna');\nif (!rxA) {\n    rxA = (txA === 'vertical') ? 'fandipole' : 'vertical';\n}\nrxA = rxA.toString();\nconst antennas = ['vertical', 'fandipole', 'deltaloop'];\nlet action = null;\nif (txMode === 'even') {\n    if (tick === 't59' || tick === 't29') action = 'toTX';\n    else if (tick === 't14' || tick === 't44') action = 'toRX';\n} else {\n    if (tick === 't14' || tick === 't44') action = 'toTX';\n    else if (tick === 't29' || tick === 't59') action = 'toRX';\n}\nconst out = [];\nif (action === 'toTX') {\n    if (txA === 'vertical') out.push({payload:true, topic:'vertical'});\n    if (txA === 'fandipole') out.push({payload:true, topic:'fandipole'});\n    if (txA === 'deltaloop') out.push({payload:true, topic:'deltaloop'});\n} else if (action === 'toRX') {\n    if (rxA === 'vertical') out.push({payload:true, topic:'vertical'});\n    if (rxA === 'fandipole') out.push({payload:true, topic:'fandipole'});\n    if (rxA === 'deltaloop') out.push({payload:true, topic:'deltaloop'});\n}\nreturn out;",
+        "func": "// msg.payload is t14/t29/t44/t59\nconst tick = msg.payload;\nnode.log(\"tick: \" + tick);\n\nconst txMode = (flow.get('txMode') || 'even').toString();\nconst txA = (flow.get('txAntenna') || 'vertical').toString();\nlet rxA = flow.get('rxAntenna');\nif (!rxA) {\n    rxA = (txA === 'vertical') ? 'fandipole' : 'vertical';\n}\nrxA = rxA.toString();\nconst antennas = ['vertical', 'fandipole', 'deltaloop'];\nlet action = null;\nif (txMode === 'even') {\n    if (tick === 't59' || tick === 't29') action = 'toTX';\n    else if (tick === 't14' || tick === 't44') action = 'toRX';\n} else {\n    if (tick === 't14' || tick === 't44') action = 'toTX';\n    else if (tick === 't29' || tick === 't59') action = 'toRX';\n}\nconst out = [];\nif (action === 'toTX') {\n    if (txA === 'vertical') out.push({payload:true, topic:'vertical'});\n    if (txA === 'fandipole') out.push({payload:true, topic:'fandipole'});\n    if (txA === 'deltaloop') out.push({payload:true, topic:'deltaloop'});\n} else if (action === 'toRX') {\n    if (rxA === 'vertical') out.push({payload:true, topic:'vertical'});\n    if (rxA === 'fandipole') out.push({payload:true, topic:'fandipole'});\n    if (rxA === 'deltaloop') out.push({payload:true, topic:'deltaloop'});\n}\nreturn out;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
