@@ -400,12 +400,17 @@
         "name": "Fandipole Output",
         "func": "// Only pass messages for fandipole\nif(msg.topic === 'fandipole'){\n    return [{payload: msg.payload}, {payload: msg.payload}];\n} else { return null; }",
         "outputs": 2,
+        "timeout": "",
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 450,
         "y": 80,
         "wires": [
             [
-                "bd7d886ef1b0b04d"
+                "bd7d886ef1b0b04d",
+                "de6c138b7ee39a6a"
             ],
             [
                 "830cd5fa.7f6fd8"
@@ -417,7 +422,7 @@
         "type": "function",
         "z": "d445d260.887a2",
         "name": "DeltaLoop Output",
-        "func": "// Only pass messages for deltaloop\nif(msg.topic === 'deltaloop'){\n    node.log(\"deltaloop: \" + msg.payload);\n    return [{payload: msg.payload}, {payload: msg.payload}, {payload: msg.payload}];\n} else { return null; }",
+        "func": "// Only pass messages for deltaloop\nnode.log(\"deltaloop: \" + msg);\nif(msg.topic === 'deltaloop'){\n   \n    return [{payload: msg.payload}, {payload: msg.payload}, {payload: msg.payload}];\n} else { return null; }",
         "outputs": 3,
         "timeout": "",
         "noerr": 0,
@@ -428,7 +433,8 @@
         "y": 380,
         "wires": [
             [
-                "798037a2f3587fd3"
+                "798037a2f3587fd3",
+                "9afd65f802dc1ad3"
             ],
             [
                 "4dc7a9dd875e4f12"
@@ -723,6 +729,38 @@
         "statusType": "auto",
         "x": 630,
         "y": 680,
+        "wires": []
+    },
+    {
+        "id": "de6c138b7ee39a6a",
+        "type": "debug",
+        "z": "d445d260.887a2",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "9afd65f802dc1ad3",
+        "type": "debug",
+        "z": "d445d260.887a2",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 320,
         "wires": []
     }
 ]
