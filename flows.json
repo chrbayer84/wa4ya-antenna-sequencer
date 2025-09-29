@@ -403,7 +403,7 @@
         "id": "2989f9dd2c1edfe2",
         "type": "inject",
         "z": "d445d260.887a2",
-        "name": "Set Mode = even",
+        "name": "Set TX Interval = even",
         "props": [
             {
                 "p": "payload"
@@ -416,7 +416,7 @@
         "topic": "",
         "payload": "even",
         "payloadType": "str",
-        "x": 120,
+        "x": 140,
         "y": 360,
         "wires": [
             [
@@ -428,7 +428,7 @@
         "id": "a9e62920f9ea88d7",
         "type": "inject",
         "z": "d445d260.887a2",
-        "name": "Set Mode = odd",
+        "name": "Set TX Interval = odd",
         "props": [
             {
                 "p": "payload"
@@ -441,7 +441,7 @@
         "topic": "",
         "payload": "odd",
         "payloadType": "str",
-        "x": 120,
+        "x": 140,
         "y": 400,
         "wires": [
             [
