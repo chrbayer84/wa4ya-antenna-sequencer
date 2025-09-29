@@ -229,8 +229,8 @@
         "id": "dcd49b4aefbe7fae",
         "type": "Invert",
         "z": "d445d260.887a2",
-        "name": "Invert",
-        "x": 750,
+        "name": "Invert Vertical",
+        "x": 780,
         "y": 180,
         "wires": [
             [
@@ -244,8 +244,8 @@
         "id": "bd7d886ef1b0b04d",
         "type": "Invert",
         "z": "d445d260.887a2",
-        "name": "Invert",
-        "x": 770,
+        "name": "Invert Fandipole",
+        "x": 800,
         "y": 40,
         "wires": [
             [
@@ -259,9 +259,9 @@
         "id": "798037a2f3587fd3",
         "type": "Invert",
         "z": "d445d260.887a2",
-        "name": "Invert",
-        "x": 810,
-        "y": 420,
+        "name": "Invert detlaloop off",
+        "x": 870,
+        "y": 400,
         "wires": [
             [
                 "1330a95f.7753b7",
@@ -275,8 +275,8 @@
         "id": "4dc7a9dd875e4f12",
         "type": "Invert",
         "z": "d445d260.887a2",
-        "name": "Invert",
-        "x": 810,
+        "name": "Invert deltaloop on",
+        "x": 850,
         "y": 480,
         "wires": [
             [
@@ -383,7 +383,11 @@
         "name": "Vertical Output",
         "func": "// Only pass messages for vertical\nif(msg.topic === 'vertical'){\n    return [{payload: msg.payload}, {payload: msg.payload}]; // first = Invert, second = Relay\n} else { return null; }",
         "outputs": 2,
+        "timeout": "",
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 460,
         "y": 180,
         "wires": [
@@ -391,8 +395,7 @@
                 "dcd49b4aefbe7fae"
             ],
             [
-                "3f7960a3.fd9d9",
-                "4bce392e4f5244f1"
+                "3f7960a3.fd9d9"
             ]
         ]
     },
@@ -436,27 +439,8 @@
             [
                 "4dc7a9dd875e4f12"
             ],
-            [
-                "1330a95f.7753b7"
-            ]
+            []
         ]
-    },
-    {
-        "id": "4bce392e4f5244f1",
-        "type": "debug",
-        "z": "d445d260.887a2",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 680,
-        "y": 300,
-        "wires": []
     },
     {
         "id": "2c338e1e4806ba94",
