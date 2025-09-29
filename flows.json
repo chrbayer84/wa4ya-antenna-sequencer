@@ -2,14 +2,7 @@
     {
         "id": "d445d260.887a2",
         "type": "tab",
-        "label": "WA4YA Antenna Switch",
-        "disabled": false,
-        "info": ""
-    },
-    {
-        "id": "ce619a17020378ee",
-        "type": "tab",
-        "label": "WA4YA Antenna Switch",
+        "label": "WA4YA Antenna Sequencer",
         "disabled": false,
         "info": ""
     },
@@ -359,7 +352,7 @@
         "type": "function",
         "z": "d445d260.887a2",
         "name": "Antenna Sequencer",
-        "func": "// msg.payload is t14/t29/t44/t59\nconst tick = msg.payload;\nnode.log(\"tick: \" + tick);\n\nconst txMode = (flow.get('txMode') || 'even').toString();\nconst txA = (flow.get('txAntenna') || 'vertical').toString();\nlet rxA = flow.get('rxAntenna');\nif (!rxA) {\n    rxA = (txA === 'vertical') ? 'fandipole' : 'vertical';\n}\nrxA = rxA.toString();\nconst antennas = ['vertical', 'fandipole', 'deltaloop'];\nlet action = null;\nif (txMode === 'even') {\n    if (tick === 't59' || tick === 't29') action = 'toTX';\n    else if (tick === 't14' || tick === 't44') action = 'toRX';\n} else {\n    if (tick === 't14' || tick === 't44') action = 'toTX';\n    else if (tick === 't29' || tick === 't59') action = 'toRX';\n}\nconst out = [];\nif (action === 'toTX') {\n    if (txA === 'vertical') out.push({payload:true, topic:'vertical'});\n    if (txA === 'fandipole') out.push({payload:true, topic:'fandipole'});\n    if (txA === 'deltaloop') out.push({payload:true, topic:'deltaloop'});\n} else if (action === 'toRX') {\n    if (rxA === 'vertical') out.push({payload:true, topic:'vertical'});\n    if (rxA === 'fandipole') out.push({payload:true, topic:'fandipole'});\n    if (rxA === 'deltaloop') out.push({payload:true, topic:'deltaloop'});\n}\nreturn out;",
+        "func": "// msg.payload is t14/t29/t44/t59\nconst tick = msg.payload;\n\nconst txMode = (flow.get('txMode') || 'even').toString();\nconst txA = (flow.get('txAntenna') || 'deltaloop').toString();\nlet rxA = (flow.get('rxAntenna') || 'deltaloop').toString();\nrxA = rxA.toString();\nconst antennas = ['vertical', 'fandipole', 'deltaloop'];\nlet action = null;\nif (txMode === 'even') {\n    if (tick === 't59' || tick === 't29') action = 'toTX';\n    else if (tick === 't14' || tick === 't44') action = 'toRX';\n} else {\n    if (tick === 't14' || tick === 't44') action = 'toTX';\n    else if (tick === 't29' || tick === 't59') action = 'toRX';\n}\nconst out = [];\nif (action === 'toTX') {\n    if (txA === 'vertical') out.push({payload:true, topic:'vertical'});\n    if (txA === 'fandipole') out.push({payload:true, topic:'fandipole'});\n    if (txA === 'deltaloop') out.push({payload:true, topic:'deltaloop'});\n} else if (action === 'toRX') {\n    if (rxA === 'vertical') out.push({payload:true, topic:'vertical'});\n    if (rxA === 'fandipole') out.push({payload:true, topic:'fandipole'});\n    if (rxA === 'deltaloop') out.push({payload:true, topic:'deltaloop'});\n}\nreturn out;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -462,7 +455,7 @@
     {
         "id": "2c338e1e4806ba94",
         "type": "inject",
-        "z": "ce619a17020378ee",
+        "z": "d445d260.887a2",
         "name": "Set RX = vertical",
         "props": [
             {
@@ -476,8 +469,8 @@
         "topic": "",
         "payload": "vertical",
         "payloadType": "str",
-        "x": 190,
-        "y": 40,
+        "x": 100,
+        "y": 540,
         "wires": [
             [
                 "ddfce09080e724f2"
@@ -487,7 +480,7 @@
     {
         "id": "cce2eb891f141efe",
         "type": "inject",
-        "z": "ce619a17020378ee",
+        "z": "d445d260.887a2",
         "name": "Set RX = fandipole",
         "props": [
             {
@@ -501,8 +494,8 @@
         "topic": "",
         "payload": "fandipole",
         "payloadType": "str",
-        "x": 200,
-        "y": 80,
+        "x": 110,
+        "y": 580,
         "wires": [
             [
                 "ddfce09080e724f2"
@@ -512,7 +505,7 @@
     {
         "id": "8a803f047be41daa",
         "type": "inject",
-        "z": "ce619a17020378ee",
+        "z": "d445d260.887a2",
         "name": "Set RX = deltaloop",
         "props": [
             {
@@ -526,8 +519,8 @@
         "topic": "",
         "payload": "deltaloop",
         "payloadType": "str",
-        "x": 200,
-        "y": 120,
+        "x": 110,
+        "y": 620,
         "wires": [
             [
                 "ddfce09080e724f2"
@@ -537,7 +530,7 @@
     {
         "id": "ddfce09080e724f2",
         "type": "function",
-        "z": "ce619a17020378ee",
+        "z": "d445d260.887a2",
         "name": "Store RX Antenna",
         "func": "flow.set('rxAntenna', msg.payload);\nnode.status({fill:\"green\", shape:\"dot\", text:\"RX=\"+msg.payload});\nreturn {payload:\"RX antenna set to \"+msg.payload};",
         "outputs": 1,
@@ -546,8 +539,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 460,
-        "y": 80,
+        "x": 370,
+        "y": 580,
         "wires": [
             [
                 "69cadbfd426e3327"
@@ -557,7 +550,7 @@
     {
         "id": "9c4600b6e8e26fe7",
         "type": "inject",
-        "z": "ce619a17020378ee",
+        "z": "d445d260.887a2",
         "name": "Set TX = vertical",
         "props": [
             {
@@ -571,8 +564,8 @@
         "topic": "",
         "payload": "vertical",
         "payloadType": "str",
-        "x": 190,
-        "y": 180,
+        "x": 100,
+        "y": 680,
         "wires": [
             [
                 "dd2287142a363414"
@@ -582,7 +575,7 @@
     {
         "id": "9c3f3fd16725fc37",
         "type": "inject",
-        "z": "ce619a17020378ee",
+        "z": "d445d260.887a2",
         "name": "Set TX = fandipole",
         "props": [
             {
@@ -596,8 +589,8 @@
         "topic": "",
         "payload": "fandipole",
         "payloadType": "str",
-        "x": 200,
-        "y": 220,
+        "x": 110,
+        "y": 720,
         "wires": [
             [
                 "dd2287142a363414"
@@ -607,7 +600,7 @@
     {
         "id": "6eb1209d25ab88e5",
         "type": "inject",
-        "z": "ce619a17020378ee",
+        "z": "d445d260.887a2",
         "name": "Set TX = deltaloop",
         "props": [
             {
@@ -621,8 +614,8 @@
         "topic": "",
         "payload": "deltaloop",
         "payloadType": "str",
-        "x": 200,
-        "y": 260,
+        "x": 110,
+        "y": 760,
         "wires": [
             [
                 "dd2287142a363414"
@@ -632,7 +625,7 @@
     {
         "id": "dd2287142a363414",
         "type": "function",
-        "z": "ce619a17020378ee",
+        "z": "d445d260.887a2",
         "name": "Store TX Antenna",
         "func": "flow.set('txAntenna', msg.payload);\nnode.status({fill:\"blue\", shape:\"dot\", text:\"TX=\"+msg.payload});\nreturn {payload:\"TX antenna set to \"+msg.payload};",
         "outputs": 1,
@@ -641,8 +634,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 460,
-        "y": 220,
+        "x": 370,
+        "y": 720,
         "wires": [
             [
                 "69cadbfd426e3327"
@@ -652,7 +645,7 @@
     {
         "id": "2989f9dd2c1edfe2",
         "type": "inject",
-        "z": "ce619a17020378ee",
+        "z": "d445d260.887a2",
         "name": "Set Mode = even",
         "props": [
             {
@@ -666,8 +659,8 @@
         "topic": "",
         "payload": "even",
         "payloadType": "str",
-        "x": 190,
-        "y": 320,
+        "x": 100,
+        "y": 820,
         "wires": [
             [
                 "3d417510ee22c549"
@@ -677,7 +670,7 @@
     {
         "id": "a9e62920f9ea88d7",
         "type": "inject",
-        "z": "ce619a17020378ee",
+        "z": "d445d260.887a2",
         "name": "Set Mode = odd",
         "props": [
             {
@@ -691,8 +684,8 @@
         "topic": "",
         "payload": "odd",
         "payloadType": "str",
-        "x": 190,
-        "y": 360,
+        "x": 100,
+        "y": 860,
         "wires": [
             [
                 "3d417510ee22c549"
@@ -702,13 +695,13 @@
     {
         "id": "3d417510ee22c549",
         "type": "function",
-        "z": "ce619a17020378ee",
+        "z": "d445d260.887a2",
         "name": "Store TX Interval Mode",
         "func": "flow.set('txMode', msg.payload);\nnode.status({fill:\"yellow\", shape:\"dot\", text:\"Mode=\"+msg.payload});\nreturn {payload:\"TX interval mode set to \"+msg.payload};",
         "outputs": 1,
         "noerr": 0,
-        "x": 480,
-        "y": 340,
+        "x": 390,
+        "y": 840,
         "wires": [
             [
                 "69cadbfd426e3327"
@@ -718,7 +711,7 @@
     {
         "id": "69cadbfd426e3327",
         "type": "debug",
-        "z": "ce619a17020378ee",
+        "z": "d445d260.887a2",
         "name": "Debug Settings",
         "active": true,
         "tosidebar": true,
@@ -728,8 +721,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 720,
-        "y": 180,
+        "x": 630,
+        "y": 680,
         "wires": []
     }
 ]
