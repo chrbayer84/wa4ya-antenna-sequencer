@@ -253,8 +253,8 @@
         "type": "Invert",
         "z": "d445d260.887a2",
         "name": "Invert detlaloop off",
-        "x": 770,
-        "y": 440,
+        "x": 790,
+        "y": 460,
         "wires": [
             [
                 "1330a95f.7753b7",
@@ -270,8 +270,8 @@
         "type": "Invert",
         "z": "d445d260.887a2",
         "name": "Invert deltaloop on",
-        "x": 810,
-        "y": 520,
+        "x": 750,
+        "y": 560,
         "wires": [
             [
                 "1330a95f.7753b7",
@@ -409,8 +409,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 450,
-        "y": 80,
+        "x": 410,
+        "y": 60,
         "wires": [
             [
                 "de6c138b7ee39a6a",
@@ -446,7 +446,6 @@
                 "e20f16a4.627318"
             ],
             [
-                "4dc7a9dd875e4f12",
                 "1330a95f.7753b7",
                 "8947799b6001c05a"
             ],
@@ -467,8 +466,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 480,
-        "y": 300,
+        "x": 440,
+        "y": 320,
         "wires": []
     },
     {
