@@ -16,65 +16,6 @@
         "wires": []
     },
     {
-        "id": "3523ad5c.eb6d32",
-        "type": "inject",
-        "z": "d445d260.887a2",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "vertical",
-        "payload": "false",
-        "payloadType": "bool",
-        "x": 110,
-        "y": 200,
-        "wires": [
-            [
-                "3f7960a3.fd9d9"
-            ]
-        ]
-    },
-    {
-        "id": "85c106e7.6370a8",
-        "type": "inject",
-        "z": "d445d260.887a2",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "vertical",
-        "payload": "true",
-        "payloadType": "bool",
-        "x": 110,
-        "y": 160,
-        "wires": [
-            [
-                "dcd49b4aefbe7fae",
-                "3f7960a3.fd9d9"
-            ]
-        ]
-    },
-    {
         "id": "830cd5fa.7f6fd8",
         "type": "RelayJ3",
         "z": "d445d260.887a2",
@@ -100,184 +41,6 @@
         "x": 1110,
         "y": 460,
         "wires": []
-    },
-    {
-        "id": "a63eab5a.daf578",
-        "type": "inject",
-        "z": "d445d260.887a2",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "fandipole",
-        "payload": "true",
-        "payloadType": "bool",
-        "x": 110,
-        "y": 40,
-        "wires": [
-            [
-                "bd7d886ef1b0b04d",
-                "830cd5fa.7f6fd8"
-            ]
-        ]
-    },
-    {
-        "id": "e0c647cc.665058",
-        "type": "inject",
-        "z": "d445d260.887a2",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "fandipole",
-        "payload": "false",
-        "payloadType": "bool",
-        "x": 110,
-        "y": 80,
-        "wires": [
-            [
-                "830cd5fa.7f6fd8"
-            ]
-        ]
-    },
-    {
-        "id": "5d7bc4cc.9c9cfc",
-        "type": "inject",
-        "z": "d445d260.887a2",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "deltaloop",
-        "payload": "true",
-        "payloadType": "bool",
-        "x": 110,
-        "y": 420,
-        "wires": [
-            [
-                "798037a2f3587fd3"
-            ]
-        ]
-    },
-    {
-        "id": "6ef75fc1.9684a",
-        "type": "inject",
-        "z": "d445d260.887a2",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "deltaloop",
-        "payload": "false",
-        "payloadType": "bool",
-        "x": 110,
-        "y": 460,
-        "wires": [
-            [
-                "4dc7a9dd875e4f12"
-            ]
-        ]
-    },
-    {
-        "id": "dcd49b4aefbe7fae",
-        "type": "Invert",
-        "z": "d445d260.887a2",
-        "name": "Invert Vertical",
-        "x": 620,
-        "y": 260,
-        "wires": [
-            [
-                "830cd5fa.7f6fd8",
-                "4dc7a9dd875e4f12",
-                "e20f16a4.627318"
-            ]
-        ]
-    },
-    {
-        "id": "bd7d886ef1b0b04d",
-        "type": "Invert",
-        "z": "d445d260.887a2",
-        "name": "Invert Fandipole",
-        "x": 800,
-        "y": 40,
-        "wires": [
-            [
-                "e20f16a4.627318",
-                "3f7960a3.fd9d9",
-                "4dc7a9dd875e4f12"
-            ]
-        ]
-    },
-    {
-        "id": "798037a2f3587fd3",
-        "type": "Invert",
-        "z": "d445d260.887a2",
-        "name": "Invert detlaloop off",
-        "x": 730,
-        "y": 480,
-        "wires": [
-            [
-                "1330a95f.7753b7",
-                "3f7960a3.fd9d9",
-                "830cd5fa.7f6fd8",
-                "e20f16a4.627318",
-                "8715db8e306e4877"
-            ]
-        ]
-    },
-    {
-        "id": "4dc7a9dd875e4f12",
-        "type": "Invert",
-        "z": "d445d260.887a2",
-        "name": "Invert deltaloop on",
-        "x": 750,
-        "y": 560,
-        "wires": [
-            [
-                "1330a95f.7753b7",
-                "45a2f9f7d51d1cfb"
-            ]
-        ]
     },
     {
         "id": "cron_plus_node",
@@ -341,8 +104,8 @@
                 "solarEvents": "sunrise,sunset"
             }
         ],
-        "x": 150,
-        "y": 260,
+        "x": 470,
+        "y": 40,
         "wires": [
             [
                 "sequencer_function"
@@ -361,14 +124,13 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 220,
-        "y": 340,
+        "x": 720,
+        "y": 300,
         "wires": [
             [
                 "invert_vertical",
                 "invert_fandipole",
-                "invert_deltaloop",
-                "e4d2b3f22418a1cf"
+                "invert_deltaloop"
             ]
         ]
     },
@@ -384,8 +146,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 460,
-        "y": 180,
+        "x": 840,
+        "y": 200,
         "wires": [
             [
                 "e20f16a4.627318",
@@ -409,17 +171,15 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 410,
-        "y": 60,
+        "x": 790,
+        "y": 80,
         "wires": [
             [
-                "de6c138b7ee39a6a",
                 "e20f16a4.627318",
                 "3f7960a3.fd9d9"
             ],
             [
                 "830cd5fa.7f6fd8",
-                "ab3853e957256d2d",
                 "1330a95f.7753b7"
             ]
         ]
@@ -436,8 +196,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 450,
-        "y": 380,
+        "x": 830,
+        "y": 400,
         "wires": [
             [
                 "3f7960a3.fd9d9",
@@ -445,29 +205,9 @@
                 "830cd5fa.7f6fd8",
                 "e20f16a4.627318"
             ],
-            [
-                "8947799b6001c05a"
-            ],
-            [
-                "9afd65f802dc1ad3"
-            ]
+            [],
+            []
         ]
-    },
-    {
-        "id": "e4d2b3f22418a1cf",
-        "type": "debug",
-        "z": "d445d260.887a2",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 440,
-        "y": 320,
-        "wires": []
     },
     {
         "id": "2c338e1e4806ba94",
@@ -486,8 +226,8 @@
         "topic": "",
         "payload": "vertical",
         "payloadType": "str",
-        "x": 100,
-        "y": 540,
+        "x": 120,
+        "y": 80,
         "wires": [
             [
                 "ddfce09080e724f2"
@@ -511,8 +251,8 @@
         "topic": "",
         "payload": "fandipole",
         "payloadType": "str",
-        "x": 110,
-        "y": 580,
+        "x": 130,
+        "y": 120,
         "wires": [
             [
                 "ddfce09080e724f2"
@@ -536,8 +276,8 @@
         "topic": "",
         "payload": "deltaloop",
         "payloadType": "str",
-        "x": 110,
-        "y": 620,
+        "x": 130,
+        "y": 160,
         "wires": [
             [
                 "ddfce09080e724f2"
@@ -556,8 +296,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 370,
-        "y": 580,
+        "x": 390,
+        "y": 120,
         "wires": [
             [
                 "69cadbfd426e3327"
@@ -581,8 +321,8 @@
         "topic": "",
         "payload": "vertical",
         "payloadType": "str",
-        "x": 100,
-        "y": 680,
+        "x": 120,
+        "y": 220,
         "wires": [
             [
                 "dd2287142a363414"
@@ -606,8 +346,8 @@
         "topic": "",
         "payload": "fandipole",
         "payloadType": "str",
-        "x": 110,
-        "y": 720,
+        "x": 130,
+        "y": 260,
         "wires": [
             [
                 "dd2287142a363414"
@@ -631,8 +371,8 @@
         "topic": "",
         "payload": "deltaloop",
         "payloadType": "str",
-        "x": 110,
-        "y": 760,
+        "x": 130,
+        "y": 300,
         "wires": [
             [
                 "dd2287142a363414"
@@ -651,8 +391,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 370,
-        "y": 720,
+        "x": 390,
+        "y": 260,
         "wires": [
             [
                 "69cadbfd426e3327"
@@ -676,8 +416,8 @@
         "topic": "",
         "payload": "even",
         "payloadType": "str",
-        "x": 100,
-        "y": 820,
+        "x": 120,
+        "y": 360,
         "wires": [
             [
                 "3d417510ee22c549"
@@ -701,8 +441,8 @@
         "topic": "",
         "payload": "odd",
         "payloadType": "str",
-        "x": 100,
-        "y": 860,
+        "x": 120,
+        "y": 400,
         "wires": [
             [
                 "3d417510ee22c549"
@@ -717,8 +457,8 @@
         "func": "flow.set('txMode', msg.payload);\nnode.status({fill:\"yellow\", shape:\"dot\", text:\"Mode=\"+msg.payload});\nreturn {payload:\"TX interval mode set to \"+msg.payload};",
         "outputs": 1,
         "noerr": 0,
-        "x": 390,
-        "y": 840,
+        "x": 410,
+        "y": 380,
         "wires": [
             [
                 "69cadbfd426e3327"
@@ -738,104 +478,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 630,
-        "y": 680,
-        "wires": []
-    },
-    {
-        "id": "de6c138b7ee39a6a",
-        "type": "debug",
-        "z": "d445d260.887a2",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 800,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "9afd65f802dc1ad3",
-        "type": "debug",
-        "z": "d445d260.887a2",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 480,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "8715db8e306e4877",
-        "type": "debug",
-        "z": "d445d260.887a2",
-        "name": "debug 4",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1160,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "45a2f9f7d51d1cfb",
-        "type": "debug",
-        "z": "d445d260.887a2",
-        "name": "debug 5",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1060,
+        "x": 420,
         "y": 540,
-        "wires": []
-    },
-    {
-        "id": "8947799b6001c05a",
-        "type": "debug",
-        "z": "d445d260.887a2",
-        "name": "debug 6",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 800,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "ab3853e957256d2d",
-        "type": "debug",
-        "z": "d445d260.887a2",
-        "name": "debug 7",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 590,
-        "y": 20,
         "wires": []
     }
 ]
