@@ -15,6 +15,13 @@
         "info": ""
     },
     {
+        "id": "ce619a17020378ee",
+        "type": "tab",
+        "label": "WA4YA Antenna Switch",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "ui_tab_main",
         "type": "ui_tab",
         "name": "Antenna Control",
@@ -362,7 +369,11 @@
         "name": "Store Settings",
         "func": "// Store the selected RX/TX antennas and interval mode in flow context\nflow.set('rxAntenna', msg.payload.rxAntenna);\nflow.set('txAntenna', msg.payload.txAntenna);\nflow.set('txMode', msg.payload.txMode);\nreturn null;",
         "outputs": 0,
+        "timeout": "",
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 460,
         "y": 560,
         "wires": []
@@ -522,5 +533,278 @@
                 "1330a95f.7753b7"
             ]
         ]
+    },
+    {
+        "id": "2c338e1e4806ba94",
+        "type": "inject",
+        "z": "ce619a17020378ee",
+        "name": "Set RX = vertical",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "vertical",
+        "payloadType": "str",
+        "x": 190,
+        "y": 40,
+        "wires": [
+            [
+                "ddfce09080e724f2"
+            ]
+        ]
+    },
+    {
+        "id": "cce2eb891f141efe",
+        "type": "inject",
+        "z": "ce619a17020378ee",
+        "name": "Set RX = fandipole",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "fandipole",
+        "payloadType": "str",
+        "x": 200,
+        "y": 80,
+        "wires": [
+            [
+                "ddfce09080e724f2"
+            ]
+        ]
+    },
+    {
+        "id": "8a803f047be41daa",
+        "type": "inject",
+        "z": "ce619a17020378ee",
+        "name": "Set RX = deltaloop",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "deltaloop",
+        "payloadType": "str",
+        "x": 200,
+        "y": 120,
+        "wires": [
+            [
+                "ddfce09080e724f2"
+            ]
+        ]
+    },
+    {
+        "id": "ddfce09080e724f2",
+        "type": "function",
+        "z": "ce619a17020378ee",
+        "name": "Store RX Antenna",
+        "func": "flow.set('rxAntenna', msg.payload);\nnode.status({fill:\"green\", shape:\"dot\", text:\"RX=\"+msg.payload});\nreturn {payload:\"RX antenna set to \"+msg.payload};",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 80,
+        "wires": [
+            [
+                "69cadbfd426e3327"
+            ]
+        ]
+    },
+    {
+        "id": "9c4600b6e8e26fe7",
+        "type": "inject",
+        "z": "ce619a17020378ee",
+        "name": "Set TX = vertical",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "vertical",
+        "payloadType": "str",
+        "x": 190,
+        "y": 180,
+        "wires": [
+            [
+                "dd2287142a363414"
+            ]
+        ]
+    },
+    {
+        "id": "9c3f3fd16725fc37",
+        "type": "inject",
+        "z": "ce619a17020378ee",
+        "name": "Set TX = fandipole",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "fandipole",
+        "payloadType": "str",
+        "x": 200,
+        "y": 220,
+        "wires": [
+            [
+                "dd2287142a363414"
+            ]
+        ]
+    },
+    {
+        "id": "6eb1209d25ab88e5",
+        "type": "inject",
+        "z": "ce619a17020378ee",
+        "name": "Set TX = deltaloop",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "deltaloop",
+        "payloadType": "str",
+        "x": 200,
+        "y": 260,
+        "wires": [
+            [
+                "dd2287142a363414"
+            ]
+        ]
+    },
+    {
+        "id": "dd2287142a363414",
+        "type": "function",
+        "z": "ce619a17020378ee",
+        "name": "Store TX Antenna",
+        "func": "flow.set('txAntenna', msg.payload);\nnode.status({fill:\"blue\", shape:\"dot\", text:\"TX=\"+msg.payload});\nreturn {payload:\"TX antenna set to \"+msg.payload};",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 220,
+        "wires": [
+            [
+                "69cadbfd426e3327"
+            ]
+        ]
+    },
+    {
+        "id": "2989f9dd2c1edfe2",
+        "type": "inject",
+        "z": "ce619a17020378ee",
+        "name": "Set Mode = even",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "even",
+        "payloadType": "str",
+        "x": 190,
+        "y": 320,
+        "wires": [
+            [
+                "3d417510ee22c549"
+            ]
+        ]
+    },
+    {
+        "id": "a9e62920f9ea88d7",
+        "type": "inject",
+        "z": "ce619a17020378ee",
+        "name": "Set Mode = odd",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "odd",
+        "payloadType": "str",
+        "x": 190,
+        "y": 360,
+        "wires": [
+            [
+                "3d417510ee22c549"
+            ]
+        ]
+    },
+    {
+        "id": "3d417510ee22c549",
+        "type": "function",
+        "z": "ce619a17020378ee",
+        "name": "Store TX Interval Mode",
+        "func": "flow.set('txMode', msg.payload);\nnode.status({fill:\"yellow\", shape:\"dot\", text:\"Mode=\"+msg.payload});\nreturn {payload:\"TX interval mode set to \"+msg.payload};",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 480,
+        "y": 340,
+        "wires": [
+            [
+                "69cadbfd426e3327"
+            ]
+        ]
+    },
+    {
+        "id": "69cadbfd426e3327",
+        "type": "debug",
+        "z": "ce619a17020378ee",
+        "name": "Debug Settings",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 180,
+        "wires": []
     }
 ]
