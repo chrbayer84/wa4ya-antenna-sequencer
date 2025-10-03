@@ -117,7 +117,7 @@
         "type": "function",
         "z": "d445d260.887a2",
         "name": "Antenna Sequencer",
-        "func": "// msg.payload is t14/t29/t44/t59\nconst tick = msg.payload;\n\nconst txMode = (flow.get('txMode') || 'even').toString();\nconst txA = (flow.get('txAntenna') || 'deltaloop').toString();\nlet rxA = (flow.get('rxAntenna') || 'deltaloop').toString();\nrxA = rxA.toString();\nconst antennas = ['vertical', 'fandipole', 'deltaloop'];\nlet action = null;\nif (txMode === 'even') {\n    if (tick === 't59' || tick === 't29') action = 'toTX';\n    else if (tick === 't14' || tick === 't44') action = 'toRX';\n} else {\n    if (tick === 't14' || tick === 't44') action = 'toTX';\n    else if (tick === 't29' || tick === 't59') action = 'toRX';\n}\nconst out = [];\nif (action === 'toTX') {\n    if (txA === 'vertical') out.push({payload:true, topic:'vertical'});\n    if (txA === 'fandipole') out.push({payload:true, topic:'fandipole'});\n    if (txA === 'deltaloop') out.push({payload:true, topic:'deltaloop'});\n} else if (action === 'toRX') {\n    if (rxA === 'vertical') out.push({payload:true, topic:'vertical'});\n    if (rxA === 'fandipole') out.push({payload:true, topic:'fandipole'});\n    if (rxA === 'deltaloop') out.push({payload:true, topic:'deltaloop'});\n}\nreturn out;",
+        "func": "// msg.payload is t14/t29/t44/t59/force\nconst tick = msg.payload;\n\nconst txMode = (flow.get('txMode') || 'even').toString();\nconst txA = (flow.get('txAntenna') || 'deltaloop').toString();\nconst rxA = (flow.get('rxAntenna') || 'deltaloop').toString();\nlet action = null;\nconst out = [];\n\nif (txMode === 'even') {\n    if (tick === 't59' || tick === 't29') action = 'toTX';\n    else if (tick === 't14' || tick === 't44') action = 'toRX';\n} else if (txMode === 'odd'){\n    if (tick === 't14' || tick === 't44') action = 'toTX';\n    else if (tick === 't29' || tick === 't59') action = 'toRX';\n} else if (tick === 'force'){\n    out.push({payload:true, topic: txA});\n    out.push({payload:true, topic: rxA});\n}\n\nif (action === 'toTX') {\n    out.push({payload:true, topic: txA});\n} else if (action === 'toRX') {\n    \n    out.push({payload:true, topic: rxA});\n}\nreturn out;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -456,7 +456,11 @@
         "name": "Store TX Interval Mode",
         "func": "flow.set('txMode', msg.payload);\nnode.status({fill:\"yellow\", shape:\"dot\", text:\"Mode=\"+msg.payload});\nreturn {payload:\"TX interval mode set to \"+msg.payload};",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 410,
         "y": 380,
         "wires": [
@@ -481,5 +485,30 @@
         "x": 420,
         "y": 540,
         "wires": []
+    },
+    {
+        "id": "9fa8e7b728da7926",
+        "type": "inject",
+        "z": "d445d260.887a2",
+        "name": "switch antenna immediately",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "force",
+        "payloadType": "str",
+        "x": 160,
+        "y": 20,
+        "wires": [
+            [
+                "cron_plus_node"
+            ]
+        ]
     }
 ]
