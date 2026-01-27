@@ -510,5 +510,25 @@
                 "sequencer_function"
             ]
         ]
+    },
+    {
+        "id": "f294c1e97a31424f",
+        "type": "comment",
+        "z": "d445d260.887a2",
+        "name": "North-South",
+        "info": "",
+        "x": 1170,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "fca6709baa27cd6b",
+        "type": "comment",
+        "z": "d445d260.887a2",
+        "name": "East-West",
+        "info": "",
+        "x": 1140,
+        "y": 500,
+        "wires": []
     }
 ]
