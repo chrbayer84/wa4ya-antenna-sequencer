@@ -43,76 +43,6 @@
         "wires": []
     },
     {
-        "id": "cron_plus_node",
-        "type": "cronplus",
-        "z": "d445d260.887a2",
-        "name": "Antenna Sequencer Scheduler",
-        "outputField": "",
-        "timeZone": "",
-        "storeName": "",
-        "commandResponseMsgOutput": "output1",
-        "defaultLocation": "",
-        "defaultLocationType": "default",
-        "outputs": 1,
-        "options": [
-            {
-                "name": "t59",
-                "topic": "t59",
-                "payloadType": "str",
-                "payload": "t59",
-                "expressionType": "cron",
-                "expression": "59 * * * * *",
-                "location": "",
-                "offset": "0",
-                "solarType": "all",
-                "solarEvents": "sunrise,sunset"
-            },
-            {
-                "name": "t14",
-                "topic": "t14",
-                "payloadType": "str",
-                "payload": "t14",
-                "expressionType": "cron",
-                "expression": "14 * * * * *",
-                "location": "",
-                "offset": "0",
-                "solarType": "all",
-                "solarEvents": "sunrise,sunset"
-            },
-            {
-                "name": "t29",
-                "topic": "t29",
-                "payloadType": "str",
-                "payload": "t29",
-                "expressionType": "cron",
-                "expression": "29 * * * * *",
-                "location": "",
-                "offset": "0",
-                "solarType": "all",
-                "solarEvents": "sunrise,sunset"
-            },
-            {
-                "name": "t44",
-                "topic": "t44",
-                "payloadType": "str",
-                "payload": "t44",
-                "expressionType": "cron",
-                "expression": "44 * * * * *",
-                "location": "",
-                "offset": "0",
-                "solarType": "all",
-                "solarEvents": "sunrise,sunset"
-            }
-        ],
-        "x": 510,
-        "y": 20,
-        "wires": [
-            [
-                "sequencer_function"
-            ]
-        ]
-    },
-    {
         "id": "sequencer_function",
         "type": "function",
         "z": "d445d260.887a2",
@@ -530,5 +460,75 @@
         "x": 1140,
         "y": 500,
         "wires": []
+    },
+    {
+        "id": "cron_plus_node",
+        "type": "cronplus",
+        "z": "d445d260.887a2",
+        "name": "Antenna Sequencer Scheduler",
+        "outputField": "",
+        "timeZone": "",
+        "storeName": "",
+        "commandResponseMsgOutput": "output1",
+        "defaultLocation": "",
+        "defaultLocationType": "default",
+        "outputs": 1,
+        "options": [
+            {
+                "name": "t59",
+                "topic": "t59",
+                "payloadType": "str",
+                "payload": "t59",
+                "expressionType": "cron",
+                "expression": "59 * * * * *",
+                "location": "",
+                "offset": "0",
+                "solarType": "all",
+                "solarEvents": "sunrise,sunset"
+            },
+            {
+                "name": "t14",
+                "topic": "t14",
+                "payloadType": "str",
+                "payload": "t14",
+                "expressionType": "cron",
+                "expression": "14 * * * * *",
+                "location": "",
+                "offset": "0",
+                "solarType": "all",
+                "solarEvents": "sunrise,sunset"
+            },
+            {
+                "name": "t29",
+                "topic": "t29",
+                "payloadType": "str",
+                "payload": "t29",
+                "expressionType": "cron",
+                "expression": "29 * * * * *",
+                "location": "",
+                "offset": "0",
+                "solarType": "all",
+                "solarEvents": "sunrise,sunset"
+            },
+            {
+                "name": "t44",
+                "topic": "t44",
+                "payloadType": "str",
+                "payload": "t44",
+                "expressionType": "cron",
+                "expression": "44 * * * * *",
+                "location": "",
+                "offset": "0",
+                "solarType": "all",
+                "solarEvents": "sunrise,sunset"
+            }
+        ],
+        "x": 510,
+        "y": 20,
+        "wires": [
+            [
+                "sequencer_function"
+            ]
+        ]
     }
 ]
