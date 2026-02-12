@@ -404,7 +404,7 @@
         "type": "debug",
         "z": "d445d260.887a2",
         "name": "Debug Settings",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
