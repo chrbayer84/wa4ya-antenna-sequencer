@@ -524,7 +524,7 @@
                 "solarEvents": "sunrise,sunset"
             }
         ],
-        "x": 510,
+        "x": 530,
         "y": 20,
         "wires": [
             [
