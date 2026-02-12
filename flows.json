@@ -60,7 +60,8 @@
             [
                 "invert_vertical",
                 "invert_fandipole",
-                "invert_deltaloop"
+                "invert_deltaloop",
+                "a7365d78ce29d4ff"
             ]
         ]
     },
@@ -530,5 +531,22 @@
                 "sequencer_function"
             ]
         ]
+    },
+    {
+        "id": "a7365d78ce29d4ff",
+        "type": "debug",
+        "z": "d445d260.887a2",
+        "name": "Debug sequencer",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 500,
+        "wires": []
     }
 ]
