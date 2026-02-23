@@ -572,7 +572,7 @@
         "ipv": "udp4",
         "multicast": "true",
         "group": "224.0.0.73",
-        "datatype": "utf8",
+        "datatype": "buffer",
         "x": 130,
         "y": 460,
         "wires": [
