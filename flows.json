@@ -47,7 +47,7 @@
         "type": "function",
         "z": "d445d260.887a2",
         "name": "Antenna Sequencer",
-        "func": "// msg.payload is t14/t29/t44/t59/force\nconst tick = msg.payload;\n\nconst txMode = (flow.get('txMode') || 'even').toString();\nconst txA = (flow.get('txAntenna') || 'deltaloop').toString();\nconst rxA = (flow.get('rxAntenna') || 'deltaloop').toString();\nlet action = null;\nconst out = [];\n\nif (tick === 'force'){\n    out.push({payload:true, topic: txA});\n    out.push({payload:true, topic: rxA});\n    return out;\n}\n\nif (txMode === 'even') {\n    if (tick === 't59' || tick === 't29') action = 'toTX';\n    else if (tick === 't14' || tick === 't44') action = 'toRX';\n} else if (txMode === 'odd'){\n    if (tick === 't14' || tick === 't44') action = 'toTX';\n    else if (tick === 't29' || tick === 't59') action = 'toRX';\n}\n\nif (action === 'toTX') {\n    out.push({payload:true, topic: txA});\n} else if (action === 'toRX') {\n    \n    out.push({payload:true, topic: rxA});\n}\nreturn out;",
+        "func": "// msg.payload is t14/t29/t44/t59/force\nconst tick = msg.payload;\n\nconst txMode = (flow.get('txMode') || 'even').toString();\nconst txA = (flow.get('txAntenna') || 'deltaloop').toString();\nconst rxA = (flow.get('rxAntenna') || 'deltaloop').toString();\nconst hold = (flow.get('hold') || true);\nconst frequency = (flow.get('frequency'));\nlet action = null;\nconst out = [];\n\nif (!hold && frequency){\n    node.warn(\"frequency: \" + frequency);\n    // set antenna based on band\n    //out.push({payload:true, topic: txA});\n    //out.push({payload:true, topic: rxA});\n    //return out;\n}\n\nif (tick === 'force'){\n    out.push({payload:true, topic: txA});\n    out.push({payload:true, topic: rxA});\n    return out;\n}\n\nif (txMode === 'even') {\n    if (tick === 't59' || tick === 't29') action = 'toTX';\n    else if (tick === 't14' || tick === 't44') action = 'toRX';\n} else if (txMode === 'odd'){\n    if (tick === 't14' || tick === 't44') action = 'toTX';\n    else if (tick === 't29' || tick === 't59') action = 'toRX';\n}\n\nif (action === 'toTX') {\n    out.push({payload:true, topic: txA});\n} else if (action === 'toRX') {\n    \n    out.push({payload:true, topic: rxA});\n}\nreturn out;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -413,8 +413,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 440,
-        "y": 540,
+        "x": 560,
+        "y": 440,
         "wires": []
     },
     {
@@ -555,7 +555,7 @@
         "z": "d445d260.887a2",
         "name": "",
         "x": 180,
-        "y": 520,
+        "y": 640,
         "wires": [
             [
                 "404c1da5b635b298"
@@ -574,7 +574,7 @@
         "group": "224.0.0.73",
         "datatype": "buffer",
         "x": 130,
-        "y": 460,
+        "y": 580,
         "wires": [
             [
                 "cc7ce2492eb2aacb"
@@ -594,10 +594,11 @@
         "finalize": "",
         "libs": [],
         "x": 170,
-        "y": 580,
+        "y": 700,
         "wires": [
             [
-                "80af70dba1bfe5a4"
+                "80af70dba1bfe5a4",
+                "dfd60e576c670698"
             ]
         ]
     },
@@ -617,5 +618,93 @@
         "x": 420,
         "y": 640,
         "wires": []
+    },
+    {
+        "id": "74af1c4525bf67f5",
+        "type": "inject",
+        "z": "d445d260.887a2",
+        "name": "hold antenna",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 110,
+        "y": 460,
+        "wires": [
+            [
+                "f3f9a45b73c9a99c"
+            ]
+        ]
+    },
+    {
+        "id": "f0b155af318249da",
+        "type": "inject",
+        "z": "d445d260.887a2",
+        "name": "follow bands",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 110,
+        "y": 500,
+        "wires": [
+            [
+                "f3f9a45b73c9a99c"
+            ]
+        ]
+    },
+    {
+        "id": "f3f9a45b73c9a99c",
+        "type": "function",
+        "z": "d445d260.887a2",
+        "name": "Store Hold",
+        "func": "flow.set('hold', msg.payload);\nnode.status({fill:\"yellow\", shape:\"dot\", text:\"Mode=\"+msg.payload});\nreturn {payload:\"Hold mode set to \"+msg.payload};",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 480,
+        "wires": [
+            [
+                "69cadbfd426e3327"
+            ]
+        ]
+    },
+    {
+        "id": "dfd60e576c670698",
+        "type": "function",
+        "z": "d445d260.887a2",
+        "name": "Store Frequency",
+        "func": "flow.set('frequency', msg.payload);\nnode.status({fill:\"yellow\", shape:\"dot\", text:\"frequency=\"+msg.payload});\nreturn {payload:\"frequency set to \"+msg.payload};",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 580,
+        "wires": [
+            []
+        ]
     }
 ]
