@@ -413,7 +413,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 420,
+        "x": 440,
         "y": 540,
         "wires": []
     },
@@ -547,6 +547,55 @@
         "statusType": "auto",
         "x": 850,
         "y": 500,
+        "wires": []
+    },
+    {
+        "id": "cc7ce2492eb2aacb",
+        "type": "wsjt-x-decode",
+        "z": "d445d260.887a2",
+        "name": "",
+        "x": 180,
+        "y": 520,
+        "wires": [
+            [
+                "7905dbd01f2d8bc6"
+            ]
+        ]
+    },
+    {
+        "id": "eb6841251c0165e2",
+        "type": "udp in",
+        "z": "d445d260.887a2",
+        "name": "",
+        "iface": "",
+        "port": "2237",
+        "ipv": "udp4",
+        "multicast": "true",
+        "group": "224.0.0.73",
+        "datatype": "utf8",
+        "x": 150,
+        "y": 460,
+        "wires": [
+            [
+                "cc7ce2492eb2aacb"
+            ]
+        ]
+    },
+    {
+        "id": "7905dbd01f2d8bc6",
+        "type": "debug",
+        "z": "d445d260.887a2",
+        "name": "Debug wsjtx",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 190,
+        "y": 600,
         "wires": []
     }
 ]
