@@ -587,7 +587,7 @@
         "type": "function",
         "z": "d445d260.887a2",
         "name": "function 1",
-        "func": "node.warn(msg.payload);\nif (typeof msg.payload === \"string\") {\n    try {\n        msg.payload = JSON.parse(msg.payload);\n    } catch (e) {\n        // Handle the error if the string is not valid JSON\n        node.error(\"JSON parse error: \" + e.message, msg);\n        return null; // Stop the flow or handle the error\n    }\n    if (msg.payload.type === 'status'){\n    return msg.payload.frequency;\n}\n}",
+        "func": "node.warn(typeof msg.payload);\nif (typeof msg.payload === \"string\") {\n\n    try {\n        msg.payload = JSON.parse(msg.payload);\n    } catch (e) {\n        // Handle the error if the string is not valid JSON\n        node.error(\"JSON parse error: \" + e.message, msg);\n        return null; // Stop the flow or handle the error\n    }\n    if (msg.payload.type === 'status'){\n    return msg.payload.frequency;\n}\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
