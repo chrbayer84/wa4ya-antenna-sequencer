@@ -586,7 +586,7 @@
         "type": "function",
         "z": "d445d260.887a2",
         "name": "function 1",
-        "func": "console.log(msg.payload.frequency);\nreturn msg;",
+        "func": "console.log(msg.payload);\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
