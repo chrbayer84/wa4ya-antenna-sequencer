@@ -596,26 +596,7 @@
         "x": 140,
         "y": 620,
         "wires": [
-            [
-                "25931986fd43923e"
-            ]
+            []
         ]
-    },
-    {
-        "id": "25931986fd43923e",
-        "type": "debug",
-        "z": "d445d260.887a2",
-        "name": "Debug Settings",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 300,
-        "y": 680,
-        "wires": []
     }
 ]
