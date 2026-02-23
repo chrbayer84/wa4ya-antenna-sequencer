@@ -558,8 +558,7 @@
         "y": 520,
         "wires": [
             [
-                "404c1da5b635b298",
-                "065e80761da243ea"
+                "404c1da5b635b298"
             ]
         ]
     },
@@ -587,15 +586,15 @@
         "type": "function",
         "z": "d445d260.887a2",
         "name": "function 1",
-        "func": "if (msg.payload.type === 'status'){\n    node.warn(msg.payload.frequency);\n    return msg.payload.frequency;\n}",
+        "func": "if (msg.payload.type === 'status'){\n    node.warn(msg.payload.frequency);\n    return msg.payload.freqency;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
-        "y": 640,
+        "x": 140,
+        "y": 620,
         "wires": [
             [
                 "25931986fd43923e"
@@ -615,25 +614,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 560,
-        "y": 660,
-        "wires": []
-    },
-    {
-        "id": "065e80761da243ea",
-        "type": "debug",
-        "z": "d445d260.887a2",
-        "name": "Debug Settings",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 140,
-        "y": 620,
+        "x": 300,
+        "y": 680,
         "wires": []
     }
 ]
