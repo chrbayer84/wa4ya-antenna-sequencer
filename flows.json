@@ -563,25 +563,6 @@
         ]
     },
     {
-        "id": "eb6841251c0165e2",
-        "type": "udp in",
-        "z": "d445d260.887a2",
-        "name": "",
-        "iface": "",
-        "port": "2237",
-        "ipv": "udp4",
-        "multicast": "true",
-        "group": "224.0.0.73",
-        "datatype": "utf8",
-        "x": 150,
-        "y": 460,
-        "wires": [
-            [
-                "cc7ce2492eb2aacb"
-            ]
-        ]
-    },
-    {
         "id": "7905dbd01f2d8bc6",
         "type": "debug",
         "z": "d445d260.887a2",
@@ -597,5 +578,24 @@
         "x": 190,
         "y": 600,
         "wires": []
+    },
+    {
+        "id": "c01c996a2908a0ef",
+        "type": "udp in",
+        "z": "d445d260.887a2",
+        "name": "",
+        "iface": "eth0",
+        "port": "2237",
+        "ipv": "udp4",
+        "multicast": "true",
+        "group": "224.0.0.73",
+        "datatype": "buffer",
+        "x": 130,
+        "y": 460,
+        "wires": [
+            [
+                "cc7ce2492eb2aacb"
+            ]
+        ]
     }
 ]
