@@ -47,7 +47,7 @@
         "type": "function",
         "z": "d445d260.887a2",
         "name": "Antenna Sequencer",
-        "func": "function getAntenna(frequency) {\n  const antennas = [\n    { name: 'vertical', min: 1.8, max: 2.0 },\n    { name: 'vertical', min: 3.5, max: 4.0 },\n    { name: 'vertical', min: 5.3305, max: 5.405 }, // Center frequencies vary\n    { name: 'vertical', min: 7.0, max: 7.3 },\n    { name: 'deltaloop', min: 10.1, max: 10.15 },\n    { name: 'vertical', min: 14.0, max: 14.35 },\n    { name: 'vertical', min: 18.068, max: 18.168 },\n    { name: 'deltaloop', min: 21.0, max: 21.45 },\n    { name: 'deltaloop', min: 24.89, max: 24.99 },\n    { name: 'deltaloop', min: 28.0, max: 29.7 }\n  ];\n\n  const antenna = antennas.find(\n    b => Number(frequency)/1000000 >= b.min \n      && Number(frequency)/1000000 <= b.max);\n  return antenna ? antenna.name : 'deltaloop';\n}\n\n// msg.payload is t14/t29/t44/t59/force\nconst tick = msg.payload;\n\nconst txMode = (flow.get('txMode') || 'even').toString();\nconst txA = (flow.get('txAntenna') || 'deltaloop').toString();\nconst rxA = (flow.get('rxAntenna') || 'deltaloop').toString();\nconst followBands = flow.get('followBands');\nconst frequency = (flow.get('frequency'));\nlet action = null;\nconst out = [];\n\nif (followBands && frequency){\n    node.warn(\"frequency: \" + frequency);\n    node.warn(\"antenna: \" + getAntenna(frequency));\n    // set antenna based on band\n    out.push({payload:true, topic: getAntenna(frequency)});\n    // probably not needed\n    out.push({payload:true, topic: getAntenna(frequency)});\n    return out;\n}\n\nif (tick === 'force'){\n    out.push({payload:true, topic: txA});\n    out.push({payload:true, topic: rxA});\n    return out;\n}\n\nif (txMode === 'even') {\n    if (tick === 't59' || tick === 't29') action = 'toTX';\n    else if (tick === 't14' || tick === 't44') action = 'toRX';\n} else if (txMode === 'odd'){\n    if (tick === 't14' || tick === 't44') action = 'toTX';\n    else if (tick === 't29' || tick === 't59') action = 'toRX';\n}\n\nif (action === 'toTX') {\n    out.push({payload:true, topic: txA});\n} else if (action === 'toRX') {\n    \n    out.push({payload:true, topic: rxA});\n}\nreturn out;",
+        "func": "function getAntenna(frequency) {\n  const antennas = [\n    { name: 'vertical', min: 1.8, max: 2.0 },\n    { name: 'vertical', min: 3.5, max: 4.0 },\n    { name: 'vertical', min: 5.3305, max: 5.405 }, // Center frequencies vary\n    { name: 'vertical', min: 7.0, max: 7.3 },\n    { name: 'deltaloop', min: 10.1, max: 10.15 },\n    { name: 'vertical', min: 14.0, max: 14.35 },\n    { name: 'vertical', min: 18.068, max: 18.168 },\n    { name: 'deltaloop', min: 21.0, max: 21.45 },\n    { name: 'deltaloop', min: 24.89, max: 24.99 },\n    { name: 'deltaloop', min: 28.0, max: 29.7 }\n  ];\n\n  const antenna = antennas.find(\n    b => Number(frequency)/1000000 >= b.min \n      && Number(frequency)/1000000 <= b.max);\n  return antenna ? antenna.name : 'deltaloop';\n}\n\n// msg.payload is 'slot' or 'force'\nconst followBands = flow.get('followBands');\nconst frequency = (flow.get('frequency'));\nconst txMode = (flow.get('txMode') || 'even').toString();\nconst txA = (flow.get('txAntenna') || 'deltaloop').toString();\nconst rxA = (flow.get('rxAntenna') || 'deltaloop').toString();\nlet action = null;\nconst out = [];\n\n// Manual force always wins over automatic band following\nif (msg.payload === 'force'){\n    out.push({payload:true, topic: txA});\n    out.push({payload:true, topic: rxA});\n    return out;\n}\n\nif (followBands && frequency){\n    node.warn(\"frequency: \" + frequency);\n    node.warn(\"antenna: \" + getAntenna(frequency));\n    // set antenna based on band\n    out.push({payload:true, topic: getAntenna(frequency)});\n    // probably not needed\n    out.push({payload:true, topic: getAntenna(frequency)});\n    return out;\n}\n\nif (msg.payload === 'slot') {\n    const isEvenSlot = (Number(msg.slot) % 2) === 0;\n    action = (isEvenSlot === (txMode === 'even')) ? 'toTX' : 'toRX';\n}\n\nif (action === 'toTX') {\n    out.push({payload:true, topic: txA});\n} else if (action === 'toRX') {\n    out.push({payload:true, topic: rxA});\n}\nreturn out;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -463,76 +463,6 @@
         "wires": []
     },
     {
-        "id": "cron_plus_node",
-        "type": "cronplus",
-        "z": "d445d260.887a2",
-        "name": "Antenna Sequencer Scheduler",
-        "outputField": "",
-        "timeZone": "",
-        "storeName": "",
-        "commandResponseMsgOutput": "output1",
-        "defaultLocation": "",
-        "defaultLocationType": "default",
-        "outputs": 1,
-        "options": [
-            {
-                "name": "t59",
-                "topic": "t59",
-                "payloadType": "str",
-                "payload": "t59",
-                "expressionType": "cron",
-                "expression": "59 * * * * *",
-                "location": "",
-                "offset": "0",
-                "solarType": "all",
-                "solarEvents": "sunrise,sunset"
-            },
-            {
-                "name": "t14",
-                "topic": "t14",
-                "payloadType": "str",
-                "payload": "t14",
-                "expressionType": "cron",
-                "expression": "14 * * * * *",
-                "location": "",
-                "offset": "0",
-                "solarType": "all",
-                "solarEvents": "sunrise,sunset"
-            },
-            {
-                "name": "t29",
-                "topic": "t29",
-                "payloadType": "str",
-                "payload": "t29",
-                "expressionType": "cron",
-                "expression": "29 * * * * *",
-                "location": "",
-                "offset": "0",
-                "solarType": "all",
-                "solarEvents": "sunrise,sunset"
-            },
-            {
-                "name": "t44",
-                "topic": "t44",
-                "payloadType": "str",
-                "payload": "t44",
-                "expressionType": "cron",
-                "expression": "44 * * * * *",
-                "location": "",
-                "offset": "0",
-                "solarType": "all",
-                "solarEvents": "sunrise,sunset"
-            }
-        ],
-        "x": 530,
-        "y": 40,
-        "wires": [
-            [
-                "sequencer_function"
-            ]
-        ]
-    },
-    {
         "id": "a7365d78ce29d4ff",
         "type": "debug",
         "z": "d445d260.887a2",
@@ -688,6 +618,163 @@
         "wires": [
             [
                 "69cadbfd426e3327"
+            ]
+        ]
+    },
+    {
+        "id": "set_interval_15",
+        "type": "inject",
+        "z": "d445d260.887a2",
+        "name": "Set Interval = 15s",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "15",
+        "payloadType": "num",
+        "x": 500,
+        "y": 760,
+        "wires": [
+            [
+                "store_switch_interval"
+            ]
+        ]
+    },
+    {
+        "id": "set_interval_30",
+        "type": "inject",
+        "z": "d445d260.887a2",
+        "name": "Set Interval = 30s",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "30",
+        "payloadType": "num",
+        "x": 500,
+        "y": 800,
+        "wires": [
+            [
+                "store_switch_interval"
+            ]
+        ]
+    },
+    {
+        "id": "set_interval_7_5",
+        "type": "inject",
+        "z": "d445d260.887a2",
+        "name": "Set Interval = 7.5s",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "7.5",
+        "payloadType": "num",
+        "x": 500,
+        "y": 840,
+        "wires": [
+            [
+                "store_switch_interval"
+            ]
+        ]
+    },
+    {
+        "id": "store_switch_interval",
+        "type": "function",
+        "z": "d445d260.887a2",
+        "name": "Store Switch Interval",
+        "func": "const allowed = [7.5, 15, 30];\nconst interval = Number(msg.payload);\n\nif (!allowed.includes(interval)) {\n    node.warn(\"Invalid switch interval: \" + msg.payload);\n    return null;\n}\n\nflow.set('switchInterval', interval);\nflow.set('lastSlotKey', null);\nnode.status({fill:\"green\", shape:\"dot\", text:\"Interval=\" + interval + \"s\"});\nreturn {payload:\"switch interval set to \" + interval + \"s\"};",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 800,
+        "wires": [
+            [
+                "debug_switch_interval"
+            ]
+        ]
+    },
+    {
+        "id": "debug_switch_interval",
+        "type": "debug",
+        "z": "d445d260.887a2",
+        "name": "Debug Interval",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "sequencer_clock_tick",
+        "type": "inject",
+        "z": "d445d260.887a2",
+        "name": "Sequencer Clock 250ms",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "0.25",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "tick",
+        "payloadType": "str",
+        "x": 530,
+        "y": 40,
+        "wires": [
+            [
+                "sequencer_clock"
+            ]
+        ]
+    },
+    {
+        "id": "sequencer_clock",
+        "type": "function",
+        "z": "d445d260.887a2",
+        "name": "Sequencer Clock",
+        "func": "const interval = Number(flow.get('switchInterval') || 15);\nconst slot = Math.floor((Date.now() / 1000 + 1) / interval);\nconst key = interval + ':' + slot;\n\nif (flow.get('lastSlotKey') === key) {\n    return null;\n}\n\nflow.set('lastSlotKey', key);\nreturn {payload: 'slot', slot: slot, interval: interval};",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "flow.set('lastSlotKey', null);",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 40,
+        "wires": [
+            [
+                "sequencer_function"
             ]
         ]
     }

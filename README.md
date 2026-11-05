@@ -2,7 +2,9 @@ wa4ya antenna sequencer
 ===============
 
 ### About
-Node-Red Keyestudios Relay Shield KS0212 based antenna sequencer switch @WA4YA. Relay shield is hooked up to 4-way antenna switch. Sequencer works for FT8 at this time (or any other 15s interval mode but not FT4 and not CW/Sideband for example). Sequencer allowos to automatically switch between transmit and receive antennas based on 15s interval and picking a TX interval (odd/even). Actual switch happens at t-1s, so sequencer will switch antennas at 14s past the minute for the 0-15 interval, at 29s past the minute for the 15-30s interval and so on.
+Node-Red Keyestudios Relay Shield KS0212 based antenna sequencer switch @WA4YA. Relay shield is hooked up to 4-way antenna switch. Sequencer works for FT8 and other 15s interval modes, and also supports FT4 (7.5s) and 30s intervals via the switch interval control. Sequencer allows to automatically switch between transmit and receive antennas based on the selected interval and picking a TX interval (odd/even). Actual switch happens at t-1s, so for a 15s interval the sequencer will switch antennas at 14s past the minute for the 0-15 interval, at 29s past the minute for the 15-30s interval and so on. For a 7.5s interval, switching happens at 6.5s, 14s, 21.5s, 29s, 36.5s, 44s, 51.5s and 59s past the minute.
+
+Use the `Set Interval = 15s`, `Set Interval = 30s` and `Set Interval = 7.5s` buttons on the flow to change the switch interval at runtime. The 7.5s, 15s and 30s intervals are intended for FT4/FT8 and other digital modes with those periods; CW and Sideband modes use different timing and are not handled by this sequencer.
 
 Based on [WA4YA Antennas](https://github.com/chrbayer84/wa4ya-antennas), so naming as per that sketch and the antennas available in the shack (vertcal, delta loop and fan dipole). Delta Loop is the default and unpowered fallback (there is no unconnected antennas at this point although that would be nice to have) so wiring for the delta loop is different from the other ports.
 
