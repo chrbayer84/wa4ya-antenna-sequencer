@@ -10,8 +10,6 @@ Based on [WA4YA Antennas](https://github.com/chrbayer84/wa4ya-antennas), so nami
 
 If you want to the same antenna for TX and RX just set it for both parameters and there will be no switching at all.
 
-Use the `hold antenna` button to use the manually selected TX/RX antennas (the sequencer still alternates between them at the selected interval), and `follow bands` to select the antenna automatically from the WSJT-X frequency.
-
 Manual selection of 4 antennas possible using node red. One antenna is wired such that it becomes active when there is no power so logic is inverted for that antenna (the deltaloop antenna in this sketch). When an antenna is selected, all other antennas are disabled/disengaged. 
 ![alt text](https://github.com/chrbayer84/wa4ya-antenna-sequencer/blob/main/Screenshot%202025-09-29%20125405.png?raw=true)
 
