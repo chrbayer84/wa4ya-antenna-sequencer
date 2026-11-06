@@ -6,6 +6,8 @@ Node-Red Keyestudios Relay Shield KS0212 based antenna sequencer switch @WA4YA. 
 
 Use the `Set Interval = 15s`, `Set Interval = 30s` and `Set Interval = 7.5s` buttons on the flow to change the switch interval at runtime. The 7.5s, 15s and 30s intervals are intended for FT4/FT8 and other digital modes with those periods; CW and Sideband modes use different timing and are not handled by this sequencer.
 
+When WSJT-X reports FT8 or FT4 in its UDP status message, the switch interval is set automatically to 15s or 7.5s. For all other modes no automatic period is applied, so the interval buttons remain in control and the selected interval is honored.
+
 Based on [WA4YA Antennas](https://github.com/chrbayer84/wa4ya-antennas), so naming as per that sketch and the antennas available in the shack (vertcal, delta loop and fan dipole). Delta Loop is the default and unpowered fallback (there is no unconnected antennas at this point although that would be nice to have) so wiring for the delta loop is different from the other ports.
 
 If you want to the same antenna for TX and RX just set it for both parameters and there will be no switching at all.
