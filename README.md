@@ -4,7 +4,20 @@ wa4ya antenna sequencer
 ### About
 Node-Red Keyestudios Relay Shield KS0212 based antenna sequencer switch @WA4YA. Relay shield is hooked up to 4-way antenna switch. The sequencer is driven by WSJT-X transmit/receive status messages: when WSJT-X starts transmitting it selects the TX antenna, and when it returns to receive it selects the RX antenna.
 
-Manual TX and RX antennas can be selected with the `Set TX = ...` and `Set RX = ...` buttons. `switch antenna immediately` re-applies the current antenna selection. When `follow bands` is enabled the antenna is selected from the reported WSJT-X frequency instead, and it is updated automatically whenever WSJT-X reports a new frequency.
+Manual TX and RX antennas can be selected with the `Set TX = ...` and `Set RX = ...` buttons. `switch antenna immediately` re-applies the current antenna selection. When `follow bands` is enabled the antenna is selected from the reported WSJT-X frequency instead, using the band table below, and it is updated on frequency or transmit/receive changes.
+
+| Band | TX antenna | RX antenna |
+|------|------------|------------|
+| 160 m | vertical | vertical |
+| 80 m | fandipole | vertical |
+| 60 m | fandipole | vertical |
+| 40 m | fandipole | vertical |
+| 30 m | deltaloop | deltaloop |
+| 20 m | fandipole | vertical |
+| 17 m | fandipole | vertical |
+| 15 m | deltaloop | deltaloop |
+| 12 m | deltaloop | deltaloop |
+| 10 m | deltaloop | deltaloop |
 
 Antenna switching occurs on the WSJT-X transmit/receive status event, so use appropriate relay/PTT interlocking to avoid hot switching.
 
