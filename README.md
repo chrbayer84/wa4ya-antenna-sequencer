@@ -2,11 +2,24 @@ wa4ya antenna sequencer
 ===============
 
 ### About
-Node-Red Keyestudios Relay Shield KS0212 based antenna sequencer switch @WA4YA. Relay shield is hooked up to 4-way antenna switch. Sequencer works for FT8 and other 15s interval modes, and also supports FT4 (7.5s) and 30s intervals via the switch interval control. Sequencer allows to automatically switch between transmit and receive antennas based on the selected interval and picking a TX interval (odd/even). Actual switch happens at t-1s, so for a 15s interval the sequencer will switch antennas at 14s past the minute for the 0-15 interval, at 29s past the minute for the 15-30s interval and so on. For a 7.5s interval, switching happens at 6.5s, 14s, 21.5s, 29s, 36.5s, 44s, 51.5s and 59s past the minute.
+Node-Red Keyestudios Relay Shield KS0212 based antenna sequencer switch @WA4YA. Relay shield is hooked up to 4-way antenna switch. The sequencer is driven by WSJT-X transmit/receive status messages: when WSJT-X starts transmitting it selects the TX antenna, and when it returns to receive it selects the RX antenna.
 
-Use the `Set Interval = 15s`, `Set Interval = 30s` and `Set Interval = 7.5s` buttons on the flow to change the switch interval at runtime. The 7.5s, 15s and 30s intervals are intended for FT4/FT8 and other digital modes with those periods; CW and Sideband modes use different timing and are not handled by this sequencer.
+Manual TX and RX antennas can be selected with the `Set TX = ...` and `Set RX = ...` buttons. `switch antenna immediately` re-applies the current antenna selection. When `follow bands` is enabled the antenna is selected from the reported WSJT-X frequency instead, using the band table below, and it is updated on frequency or transmit/receive changes.
 
-When WSJT-X reports FT8 or FT4 in its UDP status message, the switch interval is set automatically to 15s or 7.5s. For all other modes no automatic period is applied, so the interval buttons remain in control and the selected interval is honored.
+| Band | TX antenna | RX antenna |
+|------|------------|------------|
+| 160 m | vertical | vertical |
+| 80 m | fandipole | vertical |
+| 60 m | fandipole | vertical |
+| 40 m | fandipole | vertical |
+| 30 m | deltaloop | deltaloop |
+| 20 m | fandipole | vertical |
+| 17 m | fandipole | vertical |
+| 15 m | deltaloop | deltaloop |
+| 12 m | deltaloop | deltaloop |
+| 10 m | deltaloop | deltaloop |
+
+Antenna switching occurs on the WSJT-X transmit/receive status event, so use appropriate relay/PTT interlocking to avoid hot switching.
 
 Based on [WA4YA Antennas](https://github.com/chrbayer84/wa4ya-antennas), so naming as per that sketch and the antennas available in the shack (vertcal, delta loop and fan dipole). Delta Loop is the default and unpowered fallback (there is no unconnected antennas at this point although that would be nice to have) so wiring for the delta loop is different from the other ports.
 
