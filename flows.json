@@ -344,7 +344,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 600,
-        "y": 460,
+        "y": 160,
         "wires": []
     },
     {
@@ -415,7 +415,7 @@
         "z": "d445d260.887a2",
         "name": "",
         "x": 180,
-        "y": 640,
+        "y": 540,
         "wires": [
             [
                 "404c1da5b635b298",
@@ -435,7 +435,7 @@
         "group": "224.0.0.73",
         "datatype": "buffer",
         "x": 130,
-        "y": 580,
+        "y": 480,
         "wires": [
             [
                 "cc7ce2492eb2aacb"
@@ -455,7 +455,7 @@
         "finalize": "",
         "libs": [],
         "x": 170,
-        "y": 700,
+        "y": 600,
         "wires": [
             [
                 "dfd60e576c670698"
@@ -480,7 +480,7 @@
         "payload": "false",
         "payloadType": "bool",
         "x": 110,
-        "y": 460,
+        "y": 360,
         "wires": [
             [
                 "f3f9a45b73c9a99c"
@@ -505,7 +505,7 @@
         "payload": "true",
         "payloadType": "bool",
         "x": 110,
-        "y": 500,
+        "y": 400,
         "wires": [
             [
                 "f3f9a45b73c9a99c"
@@ -525,7 +525,7 @@
         "finalize": "",
         "libs": [],
         "x": 370,
-        "y": 480,
+        "y": 360,
         "wires": [
             [
                 "69cadbfd426e3327"
@@ -545,7 +545,7 @@
         "finalize": "",
         "libs": [],
         "x": 430,
-        "y": 580,
+        "y": 480,
         "wires": [
             [
                 "69cadbfd426e3327"
@@ -565,7 +565,7 @@
         "finalize": "",
         "libs": [],
         "x": 430,
-        "y": 700,
+        "y": 600,
         "wires": [
             [
                 "sequencer_function"
