@@ -47,7 +47,7 @@
         "type": "function",
         "z": "d445d260.887a2",
         "name": "Antenna Sequencer",
-        "func": "function getAntenna(frequency, transmitting) {\n  const antennas = [\n    { rx: 'vertical',   tx: 'vertical',   min: 1.8,    max: 2.0 },\n    { rx: 'vertical',   tx: 'fandipole',  min: 3.5,    max: 4.0 },\n    { rx: 'vertical',   tx: 'fandipole',  min: 5.3305, max: 5.405 },\n    { rx: 'vertical',   tx: 'fandipole',  min: 7.0,    max: 7.3 },\n    { rx: 'deltaloop',  tx: 'deltaloop',  min: 10.1,   max: 10.15 },\n    { rx: 'vertical',   tx: 'fandipole',  min: 14.0,   max: 14.35 },\n    { rx: 'vertical',   tx: 'fandipole',  min: 18.068, max: 18.168 },\n    { rx: 'deltaloop',  tx: 'deltaloop',  min: 21.0,   max: 21.45 },\n    { rx: 'deltaloop',  tx: 'deltaloop',  min: 24.89,  max: 24.99 },\n    { rx: 'deltaloop',  tx: 'deltaloop',  min: 28.0,   max: 29.7 }\n  ];\n\n  const band = antennas.find(\n    b => Number(frequency)/1000000 >= b.min\n      && Number(frequency)/1000000 <= b.max);\n\n  if (!band) {\n    return 'deltaloop';\n  }\n\n  return transmitting ? band.tx : band.rx;\n}\n\n// msg.payload is 'ptt', 'band' or 'force'\nconst followBands = flow.get('followBands');\nconst frequency = (flow.get('frequency'));\nconst txA = (flow.get('txAntenna') || 'deltaloop').toString();\nconst rxA = (flow.get('rxAntenna') || 'deltaloop').toString();\nconst transmitting = flow.get('wsjtxTransmitting') === true;\nconst out = [];\n\n// Manual force always wins over automatic band following\nif (msg.payload === 'force'){\n    if (followBands && frequency) {\n        out.push({payload:true, topic: getAntenna(frequency, transmitting)});\n        return out;\n    }\n    out.push({payload:true, topic: txA});\n    out.push({payload:true, topic: rxA});\n    return out;\n}\n\n// Follow-bands update from WSJT-X status messages\nif (msg.payload === 'band') {\n    const bandFrequency = (msg.frequency !== undefined) ? msg.frequency : frequency;\n    const bandTransmitting = (msg.transmitting !== undefined) ? msg.transmitting === true : transmitting;\n    if (followBands && bandFrequency) {\n        out.push({payload:true, topic: getAntenna(bandFrequency, bandTransmitting)});\n    }\n    return out;\n}\n\n// PTT based sequencing\nif (msg.payload === 'ptt') {\n    const eventFrequency = (msg.frequency !== undefined) ? msg.frequency : frequency;\n    const eventTransmitting = msg.transmitting === true;\n    const antenna = (followBands && eventFrequency)\n        ? getAntenna(eventFrequency, eventTransmitting)\n        : (eventTransmitting ? txA : rxA);\n    out.push({payload:true, topic: antenna});\n    return out;\n}\n\nreturn out;",
+        "func": "function getAntenna(frequency, transmitting) {\n  const antennas = [\n    { rx: 'vertical',   tx: 'vertical',   min: 1.8,    max: 2.0 },\n    { rx: 'vertical',   tx: 'fandipole',  min: 3.5,    max: 4.0 },\n    { rx: 'vertical',   tx: 'fandipole',  min: 5.3305, max: 5.405 },\n    { rx: 'vertical',   tx: 'fandipole',  min: 7.0,    max: 7.3 },\n    { rx: 'deltaloop',  tx: 'deltaloop',  min: 10.1,   max: 10.15 },\n    { rx: 'vertical',   tx: 'fandipole',  min: 14.0,   max: 14.35 },\n    { rx: 'vertical',   tx: 'fandipole',  min: 18.068, max: 18.168 },\n    { rx: 'deltaloop',  tx: 'deltaloop',  min: 21.0,   max: 21.45 },\n    { rx: 'deltaloop',  tx: 'deltaloop',  min: 24.89,  max: 24.99 },\n    { rx: 'deltaloop',  tx: 'deltaloop',  min: 28.0,   max: 29.7 }\n  ];\n\n  const band = antennas.find(\n    b => Number(frequency)/1000000 >= b.min\n      && Number(frequency)/1000000 <= b.max);\n\n  if (!band) {\n    return 'deltaloop';\n  }\n\n  return transmitting ? band.tx : band.rx;\n}\n\n// msg.payload is 'ptt' or 'band'\nconst followBands = flow.get('followBands');\nconst frequency = (flow.get('frequency'));\nconst txA = (flow.get('txAntenna') || 'deltaloop').toString();\nconst rxA = (flow.get('rxAntenna') || 'deltaloop').toString();\nconst transmitting = flow.get('wsjtxTransmitting') === true;\nconst out = [];\n\n// Follow-bands update from WSJT-X status messages\nif (msg.payload === 'band') {\n    const bandFrequency = (msg.frequency !== undefined) ? msg.frequency : frequency;\n    const bandTransmitting = (msg.transmitting !== undefined) ? msg.transmitting === true : transmitting;\n    if (followBands && bandFrequency) {\n        out.push({payload:true, topic: getAntenna(bandFrequency, bandTransmitting)});\n    }\n    return out;\n}\n\n// PTT based sequencing\nif (msg.payload === 'ptt') {\n    const eventFrequency = (msg.frequency !== undefined) ? msg.frequency : frequency;\n    const eventTransmitting = msg.transmitting === true;\n    const antenna = (followBands && eventFrequency)\n        ? getAntenna(eventFrequency, eventTransmitting)\n        : (eventTransmitting ? txA : rxA);\n    out.push({payload:true, topic: antenna});\n    return out;\n}\n\nreturn out;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -346,31 +346,6 @@
         "x": 600,
         "y": 460,
         "wires": []
-    },
-    {
-        "id": "9fa8e7b728da7926",
-        "type": "inject",
-        "z": "d445d260.887a2",
-        "name": "switch antenna immediately",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": "",
-        "topic": "",
-        "payload": "force",
-        "payloadType": "str",
-        "x": 160,
-        "y": 20,
-        "wires": [
-            [
-                "sequencer_function"
-            ]
-        ]
     },
     {
         "id": "f294c1e97a31424f",
